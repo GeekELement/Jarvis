@@ -22,7 +22,7 @@ Jarvis是一个基于FastAPI开发的智能备忘录和任务管理系统，它�
 
 1. 克隆项目
 ```bash
-git clone https://github.com/yourusername/Jarvis.git
+git clone https://github.com/GeekElement/Jarvis.git
 cd Jarvis
 ```
 
