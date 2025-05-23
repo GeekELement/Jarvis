@@ -1,0 +1,7 @@
+{% for task in tasks %}
+    <li id="task-{{ loop.index0 }}" style="display: flex; align-items: center; justify-content: space-between; padding: 10px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 10px;">
+        <span style="flex-grow: 1;">{{ task.content }}</span>
+        <span style="background-color: {% if task.priority == 'high' %}#ffcccc{% elif task.priority == 'medium' %}#fff0b3{% else %}#ccffcc{% endif %}; padding: 5px 10px; border-radius: 5px; margin-right: 10px;">{{ task.priority }}</span>
+        <button onclick="deleteTask({{ loop.index0 }})" style="background-color: #ff5252; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">删除</button>
+    </li>
+{% endfor %}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>备忘录管理系统</title>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .memo-form, .memo-display, .todo-list {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        .save-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .save-btn:hover {
+            background: #45a049;
+        }
+        .delete-btn {
+            background: #ff5252;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .delete-btn:hover {
+            background: #ff1744;
+        }
+        .task-item {
+            margin: 10px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .priority-high {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .priority-medium {
+            background-color: #fff3e0;
+            color: #ef6c00;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+        .priority-low {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>备忘录管理系统</h1>
+    
+    <div class="container">
+        <div class="left-panel">
+            <div class="memo-form">
+                <h2>添加新备忘录</h2>
+                <form hx-post="/memo" 
+                      hx-target="#result"
+                      hx-on::after-request="this.reset(); htmx.trigger('#memo-content', 'refreshMemos')">
+                    <textarea name="content" placeholder="请输入备忘录内容..."></textarea>
+                    <button type="submit" class="save-btn">保存</button>
+                </form>
+                <div id="result"></div>
+            </div>
+            
+            <div class="memo-display">
+                <h2>当前备忘录内容</h2>
+                <div id="memo-content" 
+                     hx-get="/current-memo" 
+                     hx-trigger="load, refreshMemos from:body">
+                </div>
+            </div>
+        </div>
+        
+        <div class="right-panel">
+            <div class="todo-list">
+                <div hx-get="/todo-list" hx-trigger="load">
+                </div>
+                <button onclick="triggerAIAnalysis()" class="ai-analysis-btn">AI分析</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function triggerAIAnalysis() {
+        fetch('/ai-analysis', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(response => response.json())
+        .then(data => alert(data.analysis))
+    }
+</script>

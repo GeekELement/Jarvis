@@ -1,0 +1,26 @@
+<div class="todo-list">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+        <!-- 确保这里没有多余的按钮 -->
+    </div>
+    <ul id="task-list">
+        {% include "partials/task_list.html" %}
+    </ul>
+</div>
+
+<script>
+    function deleteTask(taskIndex) {
+        fetch(`/delete-task/${taskIndex}`, {
+            method: 'DELETE',
+            headers: {
+                'Accept': 'text/html'
+            }
+        })
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('task-list').innerHTML = html;
+        })
+        .catch(error => console.error('请求失败:', error));
+    }
+
+    // 删除了 analyzeTasks 函数
+</script>

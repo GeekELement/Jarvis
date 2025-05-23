@@ -1,0 +1,7 @@
+schedule:
+  analyze_time: "08:00"
+  email_time: "08:10"
+email:
+  recipient: "接收通知的邮箱地址"
+  smtp_server: "smtp.example.com"
+  smtp_port: 587

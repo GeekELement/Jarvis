@@ -1,0 +1,16 @@
+<div class="memo-items" id="memo-container">
+    {% for line in content %}
+        {% if line.strip() %}
+            <div class="memo-item" style="background: white; margin: 10px 0; padding: 15px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center;">
+                <span style="color: #333;">{{ line }}</span>
+                <button hx-delete="/delete-memo/{{ loop.index0 }}"
+                        hx-target="#memo-container"
+                        hx-swap="innerHTML"
+                        hx-confirm="确定要删除这条备忘录吗？"
+                        style="background-color: #ff5252; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; margin-left: 15px;">
+                    删除
+                </button>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
