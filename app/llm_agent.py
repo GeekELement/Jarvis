@@ -6,14 +6,14 @@ from email.header import Header
 
 class LLMAgent:
     def __init__(self):
-        self.api_url = "https://api.siliconflow.cn/v1/chat/completions"  # 修正 API 地址
-        self.api_key = "sk-kxgzkgnkxfpfwronoptcngmuksfajtukhxqlnyrwojwprllz"
+        self.api_url = "https://api.example.com/v1/chat/completions"  # 示例 API 地址
+        self.api_key = "your-api-key-here"  # 请替换为你的 API 密钥
         self.email_config = {
-            "smtp_server": "smtp.qq.com",  # QQ 邮箱的 SMTP 服务器
-            "smtp_port": 465,  # QQ 邮箱的 SSL 端口
-            "sender": "geekelement@foxmail.com",  # 发送者邮箱
-            "password": "arbujsionfnycifb",  # 需要在QQ邮箱设置中获取授权码
-            "receiver": "geekelement@foxmail.com"  # 接收者邮箱
+            "smtp_server": "smtp.example.com",  # 示例 SMTP 服务器
+            "smtp_port": 587,  # 示例 SMTP 端口
+            "sender": "your-email@example.com",  # 发送者邮箱
+            "password": "your-email-password",  # 邮箱密码或授权码
+            "receiver": "recipient@example.com"  # 接收者邮箱
         }
 
     def analyze_memo(self, content):
